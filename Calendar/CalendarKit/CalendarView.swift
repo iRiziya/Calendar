@@ -27,11 +27,22 @@ class CalendarView: UIView, UICollectionViewDataSource, UICollectionViewDelegate
     var baseDate: Date? {
         didSet {
             collectionData = [CalendarLogic]()
-            if let date = baseDate {
-                var dateIter1 = date, dateIter2 = date
+            
+            let df = DateFormatter()
+            df.dateFormat = "yyyy-MM-dd"
+            
+            let str = df.string(from: baseDate!)
+            
+            let dateNew = df.date(from: str)            
+                        
+            if let date = dateNew {
+                
+                var dateIter1 = date
+                
+                var dateIter2 = date
                 
                 var set = Set<CalendarLogic>()
-                set.insert(CalendarLogic(date: baseDate!))
+                set.insert(CalendarLogic(date: dateNew!))
                 
                 // advance one year
                 (0..<kMonthRange).forEach { _ in
