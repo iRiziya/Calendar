@@ -16,7 +16,12 @@ class ViewController: UIViewController, CalendarViewDelegate {
         super.viewDidLoad()
         
         // todays date.
-        let date = Date()
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd"
+        
+        let str = df.string(from: Date())
+        
+        let date = df.date(from: str)!         
         
         // create an instance of calendar view with 
         // base date (Calendar shows 12 months range from current base date)
